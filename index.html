@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Will You Be My Valentine?</title>
+  <!-- Importing Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Full-screen gradient background */
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    /* Card container with semi-transparency, rounded corners, and shadow */
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #d10056;
+      margin-bottom: 1.5rem;
+    }
+    /* Button container sets the movement area for the "No" button */
+    .button-container {
+      position: relative;
+      height: 150px;
+      margin-top: 1rem;
+    }
+    /* Common button styles */
+    button {
+      font-size: 1.2rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    /* "Yes" button styling */
+    #yesButton {
+      background-color: #d10056;
+      color: white;
+      box-shadow: 0 4px 8px rgba(209, 0, 86, 0.4);
+    }
+    #yesButton:hover {
+      transform: scale(1.05);
+    }
+    /* "No" button styling and absolute positioning within container */
+    #noButton {
+      background-color: white;
+      color: #d10056;
+      border: 2px solid #d10056;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #noButton:hover {
+      transform: translate(-50%, -50%) rotate(5deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Will You Be My Valentine?</h1>
+    <div class="button-container">
+      <button id="yesButton" onclick="handleYes()">Yes</button>
+      <button id="noButton" onmouseover="moveNoButton()">No</button>
+    </div>
+  </div>
+  <script>
+    function handleYes() {
+      // Replace page content with a thank-you message
+      document.body.innerHTML = "<div style='text-align:center;padding:2rem;'><h1 style='color:#d10056;'>YAYY my kwaaikie i love you</h1></div>";
+    }
+    function moveNoButton() {
+      const noButton = document.getElementById('noButton');
+      const container = document.querySelector('.button-container');
+      const containerRect = container.getBoundingClientRect();
+      const btnRect = noButton.getBoundingClientRect();
+      // Calculate available space within the container
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = containerRect.height - btnRect.height;
+      // Random position within the container bounds
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+      noButton.style.left = randomX + "px";
+      noButton.style.top = randomY + "px";
+      // Gradually increase the "Yes" button's font size on each move
+      const yesButton = document.getElementById('yesButton');
+      let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+      yesButton.style.fontSize = (currentSize + 2) + "px";
+    }
+  </script>
+</body>
+</html>
